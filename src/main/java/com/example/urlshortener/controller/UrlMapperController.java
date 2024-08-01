@@ -1,5 +1,6 @@
 package com.example.urlshortener.controller;
 
+import com.example.urlshortener.exceptions.URLNotFoundException;
 import com.example.urlshortener.models.UrlMapper;
 import com.example.urlshortener.repository.UrlMapperRepository;
 import com.example.urlshortener.service.UrlMapperService;
@@ -25,7 +26,7 @@ public class UrlMapperController {
     public String getDestinationUrl(@RequestParam String shortUrl) {
         String destinationUrl = urlMapperService.getDestinationUrl(shortUrl);
         if(destinationUrl == null || destinationUrl.isEmpty()) {
-            return "NoUrl found";
+            throw new URLNotFoundException("The destination url does not exist");
         }
         return destinationUrl;
     }
