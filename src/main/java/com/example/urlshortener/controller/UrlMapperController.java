@@ -22,8 +22,8 @@ public class UrlMapperController {
         String shortUrl = urlMapperService.shortenUrl(destinationUrl);
         return ResponseEntity.ok().body(shortUrl);
     }
-    @GetMapping("/getshortUrl")
-    public String getDestinationUrl(@RequestParam String shortUrl) {
+    @GetMapping("/getshortUrl/{shortUrl}")
+    public String getDestinationUrl(@PathVariable String shortUrl) {
         String destinationUrl = urlMapperService.getDestinationUrl(shortUrl);
         if(destinationUrl == null || destinationUrl.isEmpty()) {
             throw new URLNotFoundException("The destination url does not exist");
